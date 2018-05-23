@@ -1,0 +1,1 @@
+!function(){var n;n="Jean",console.info(n,", un saludo desde Lima")}();

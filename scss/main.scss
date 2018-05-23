@@ -1,0 +1,17 @@
+$color-fondo: #cccccc;
+$red: red;
+body {
+    background-color: $color-fondo;
+    & h1 {
+        margin: 0 auto;
+        color: $red;
+    }
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    & div {
+        background-color: gray;
+    }
+}
