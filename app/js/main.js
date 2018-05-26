@@ -5,5 +5,5 @@
     function saludar(nombre) {
         console.info(nombre, ', un saludo desde Lima')
     }
-    saludar(nombrar('Jean'));
+    saludar(nombrar('@JeanDevonne'));
 })();

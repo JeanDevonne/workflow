@@ -1,8 +1,8 @@
+//Automate and enhance your worckflow
 //require('gulp') busca el modulo gulp en el directorio node_modules y lo asigna a la constante gulp
 const gulp = require('gulp');
 const sass = require('gulp-sass');
 var uglify = require('gulp-uglify');
-var pump = require('pump');
 var cssnano = require('gulp-cssnano');
 var imagemin = require('gulp-imagemin');
 var autoprefixer = require('gulp-autoprefixer');
@@ -16,56 +16,42 @@ var browserSync = require('browser-sync').create();
 // });
 
 // Static Server + watching scss/html files
-gulp.task('serve', ['sass'], function() {
-
+gulp.task('default', ['css', 'javascript'], function() {
     browserSync.init({
         server: "./app"
     });
-    gulp.watch("app/js/*js", ['comprimir']);
-    gulp.watch("scss/**/*.scss", ['sass']);
+
+    gulp.watch("app/js/*js", ['javascript']).on('change', browserSync.reload);
+    gulp.watch("scss/**/*.scss", ['css']);
     gulp.watch("app/*.html").on('change', browserSync.reload);
-    gulp.watch("./*.html", ["minificar"]);
+    gulp.watch("./*.html", ["html"]);
 });
 
 //minificar html
-gulp.task('minificar', function() {
+gulp.task('html', function() {
     return gulp.src('./*.html')
       .pipe(htmlmin({collapseWhitespace: true}))
       .pipe(gulp.dest('app'));
   });
 
-//autoprefijar
-gulp.task('autoprefijar', () =>
-    gulp.src('scss/**/*.scss')
-        .pipe(autoprefixer({
-            browsers: ['last 5 versions'],
-            cascade: false
-        }))
-        .pipe(gulp.dest('app/css'))
-);
-
 //Tarea independiente para optimizar imágenes
-gulp.task('optimizar', () =>
+gulp.task('imagenes', function() {
     gulp.src('img/*')
         .pipe(imagemin())
         .pipe(gulp.dest('app/img'))
-);
+});
 
 //Tarea para comprimir JS
-gulp.task('comprimir', function (cb) {
-    pump([
-          gulp.src('app/js/*.js'),
-          uglify(),
-          gulp.dest('app/js/dist')
-      ],
-      cb
-    );
-  });
+gulp.task('javascript', function () {
+    gulp.src('app/js/*.js')
+        .pipe(uglify())
+        .pipe(gulp.dest('app/js/dist'));
+});
 
 //Creamos otra tarea para convertir SCSS a CSS
 //gulp.src es el origen (ubicación del archivo .scss)
 //pipe es un metodo de gulp que sirve para encadenar diferentes módulos.
-gulp.task('sass', function(){
+gulp.task('css', function(){
     return gulp.src('scss/**/*.scss')
         .pipe(sass())
         .pipe(cssnano())

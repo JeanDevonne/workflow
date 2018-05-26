@@ -1,17 +1,40 @@
-$color-fondo: #cccccc;
-$red: red;
+//Partials
+/* @import  _partial.scss
+*
+*/
+@import '_colores.scss';
+@import 'mixins';
 body {
-    background-color: $color-fondo;
-    & h1 {
-        margin: 0 auto;
-        color: $red;
+    background-color: $color-corporativo;
+}
+//Nesting
+header {
+    background-color: $color-acentuado;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+    & nav {
+        background-color: $color-acentuado;
     }
 }
 
-main {
-    display: flex;
-    justify-content: center;
-    & div {
-        background-color: gray;
-    }
+// Extend
+.modelo {
+    padding: 10px;
+    box-shadow: 1px 1px 5px black;
+    text-shadow: 1px 1px 2px black;
+}
+
+.success {
+    @extend .modelo;
+    border: 1px solid green;
+}
+.error {
+    @extend .modelo;
+    border: 1px solid red;
+}
+
+p {
+    //Llamando al mixin
+    @include margen(5px, 2px)
 }

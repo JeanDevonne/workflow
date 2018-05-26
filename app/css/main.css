@@ -1,1 +1,1 @@
-body{background-color:#ccc}body h1{margin:0 auto;color:red}main{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center}main div{background-color:gray}
+body{background-color:#fff}header,header nav{background-color:green}.error,.modelo,.success{padding:10px;-webkit-box-shadow:1px 1px 5px #000;box-shadow:1px 1px 5px #000;text-shadow:1px 1px 2px #000}.success{border:1px solid green}.error{border:1px solid red}p{margin:5px 2px}
